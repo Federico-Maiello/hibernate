@@ -1,4 +1,4 @@
-package com.example.exercise8;
+package com.example.exercise8.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -6,25 +6,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
-import java.util.*;
-
 @Entity
 @Table
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Classes {
+public class Enrollment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false)
-    private String title;
+    @ManyToOne
+    @JoinColumn(name = "student_id", nullable = false)
+    private Student student;
 
-    @Column(nullable = false)
-    private String description;
-
-    @OneToMany(mappedBy = "class")
-    private Set<Enrollment> enrollments = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "class_id", nullable = false)
+    private Classes classes;
 
 }
